@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Production — Silas Studio Prompt Bank</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="visual-production-page">
+  <main class="visual-production-stage" aria-label="Visual Production studio">
+    <img
+      class="tropical-background"
+      src="assets/visual/tropic_forest.png"
+      alt=""
+    />
+
+    <button class="forest-character character-tuki" type="button" data-character="tuki" aria-label="Talk to Tuki">
+      <img src="assets/visual/Tuki_09.svg" alt="Tuki" />
+    </button>
+
+    <button class="forest-character character-piko" type="button" data-character="piko" aria-label="Talk to Piko">
+      <img src="assets/visual/Piko_03.svg" alt="Piko" />
+    </button>
+
+    <button class="forest-character character-mako" type="button" data-character="mako" aria-label="Talk to Mako">
+      <img src="assets/visual/Mako_08.svg" alt="Mako" />
+    </button>
+
+    <button class="forest-character character-lasu" type="button" data-character="lasu" aria-label="Talk to Lasu">
+      <img src="assets/visual/Lasu_07.svg" alt="Lasu" />
+    </button>
+
+    <a
+      class="sleeping-silas-link"
+      href="index.html"
+      aria-label="Return to the Prompt Bank entrance"
+      title="Return to the Prompt Bank entrance"
+    >
+      <img src="assets/visual/Silas_autumnal_sleep.svg" alt="Sleeping Silas" />
+    </a>
+
+    <section class="production-dialogue" aria-live="polite" aria-atomic="true">
+      <strong class="production-dialogue-title"></strong>
+      <span class="production-dialogue-text"></span>
+    </section>
+
+    <section class="prompt-workspace" id="prompt-workspace" aria-labelledby="workspace-title" aria-hidden="true" inert>
+      <header class="workspace-header">
+        <img class="workspace-avatar" src="assets/visual/Tuki_01.svg" alt="" />
+        <div class="workspace-heading">
+          <h1 class="workspace-title" id="workspace-title">Tuki</h1>
+          <p class="workspace-role">Narrative &amp; Motif Designer / Prompt Workspace</p>
+        </div>
+      </header>
+
+      <div class="workspace-divider" aria-hidden="true"></div>
+
+      <nav class="workspace-library-nav" aria-label="Prompt library navigation">
+        <button class="workspace-back" type="button" hidden>← Back</button>
+        <div class="workspace-location">
+          <strong class="workspace-location-title" tabindex="-1">Prompt Library</strong>
+          <span class="workspace-location-path">Library root</span>
+        </div>
+      </nav>
+
+      <!-- Rendered from UI-only demo data. Real prompt-library loading is intentionally deferred. -->
+      <div class="workspace-prompt-list" aria-live="polite">
+      </div>
+
+      <div class="workspace-divider" aria-hidden="true"></div>
+      <p class="workspace-status" aria-live="polite">UI shell — prompt folder loading is not connected yet.</p>
+    </section>
+
+    <button class="workspace-book-controller" type="button" aria-label="Open Tuki’s prompt workspace" aria-controls="prompt-workspace" aria-expanded="false" title="Open prompt workspace">
+      <img src="assets/visual/promptStudio_books_01.svg" alt="" />
+    </button>
+  </main>
+
+  <script src="visual-production.js"></script>
+</body>
+</html>

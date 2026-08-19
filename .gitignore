@@ -1,0 +1,14 @@
+.DS_Store
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+
+# Editor, cache, and temporary files
+.cache/
+.idea/
+.vscode/
+*.swp
+*.swo
+*.tmp
+*~
