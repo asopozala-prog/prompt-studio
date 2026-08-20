@@ -253,7 +253,7 @@ window.addEventListener("load", () => {
     const characterKey = button.dataset.character;
     const character = characters[characterKey];
 
-    button.addEventListener("animationend", () => button.classList.add("is-ready"), { once: true });
+    button.classList.add("is-ready");
     button.addEventListener("mouseenter", () => {
       if (hasDesktopHover.matches && character) showDialogue(character);
     });
