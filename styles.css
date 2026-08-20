@@ -35,10 +35,18 @@ body {
   position: absolute;
   left: 57%;
   bottom: 14%;
-  width: min(30vw, 465px);
+  width: min(24vw, 372px);
   height: auto;
   transform: translateX(-50%);
   filter: saturate(0.82) brightness(0.94) sepia(0.08);
+  cursor: pointer;
+  z-index: 3;
+}
+
+.silas:focus-visible {
+  outline: 3px solid rgba(255, 247, 189, 0.95);
+  outline-offset: 4px;
+  border-radius: 42%;
 }
 
 /* Floating prompt books — launch from Silas's laptop after page load */
@@ -46,7 +54,7 @@ body {
 .book-flight-layer {
   position: absolute;
   inset: 0;
-  pointer-events: auto;
+  pointer-events: none;
   z-index: 4;
 }
 
@@ -203,6 +211,7 @@ body {
   padding: 1.25rem 1.5rem;
   transform: translateX(-50%) translateY(18px);
   opacity: 0;
+  visibility: hidden;
   z-index: 6;
   pointer-events: none;
 
@@ -222,29 +231,13 @@ body {
     0 12px 30px rgba(74, 55, 28, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.45);
 
-  animation: welcome-sequence 8s ease forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
 }
 
-@keyframes welcome-sequence {
-  0% {
-    opacity: 0;
-    transform: translate(-5%, 390px) scale(0.18);
-  }
-
-  14% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-
-  82% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-18px) scale(0.98);
-  }
+.welcome-box.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Sequential book introduction dialogue */
@@ -831,4 +824,26 @@ body {
   .workspace-avatar.avatar-copy,
   .workspace-avatar.avatar-close,
   .workspace-avatar.avatar-react { animation-duration: 1ms; }
+}
+
+/* Entrance page — iPhone/mobile tuning */
+@media (max-width: 700px) {
+  .silas {
+    width: min(18vw, 280px);
+  }
+
+  .welcome-box {
+    width: min(72%, 360px);
+    padding: 0.8rem 1rem;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .book-dialogue {
+    width: min(76%, 360px);
+    max-width: calc(100% - 28px);
+    padding: 0.75rem 0.95rem;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
 }

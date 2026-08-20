@@ -4,6 +4,8 @@ let entranceNavigationStarted = false;
 
 window.addEventListener("load", () => {
   const studio = document.querySelector(".studio");
+  const silas = document.querySelector(".silas");
+  const welcome = document.querySelector(".welcome-box");
   const dialogue = document.querySelector(".book-dialogue");
   const dialogueTitle = document.querySelector(".book-dialogue-title");
   const dialogueText = document.querySelector(".book-dialogue-text");
@@ -14,6 +16,8 @@ window.addEventListener("load", () => {
 
   if (
     !studio ||
+    !silas ||
+    !welcome ||
     !dialogue ||
     !dialogueTitle ||
     !dialogueText ||
@@ -26,6 +30,67 @@ window.addEventListener("load", () => {
 
   const timers = [];
   let visitorInterrupted = false;
+  let silasHovered = false;
+  let silasFocused = false;
+  let touchWelcomeOpen = false;
+  const hasDesktopHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+  const updateWelcome = () => {
+    const isVisible = hasDesktopHover.matches
+      ? silasHovered || silasFocused
+      : touchWelcomeOpen;
+
+    welcome.classList.toggle("is-visible", isVisible);
+    silas.setAttribute("aria-expanded", String(isVisible));
+  };
+
+  silas.addEventListener("mouseenter", () => {
+    if (hasDesktopHover.matches) {
+      silasHovered = true;
+      updateWelcome();
+    }
+  });
+
+  silas.addEventListener("mouseleave", () => {
+    if (hasDesktopHover.matches) {
+      silasHovered = false;
+      updateWelcome();
+    }
+  });
+
+  silas.addEventListener("focus", () => {
+    if (hasDesktopHover.matches) {
+      silasFocused = true;
+      updateWelcome();
+    }
+  });
+
+  silas.addEventListener("blur", () => {
+    silasFocused = false;
+    updateWelcome();
+  });
+
+  silas.addEventListener("click", () => {
+    if (!hasDesktopHover.matches) {
+      touchWelcomeOpen = !touchWelcomeOpen;
+      updateWelcome();
+    }
+  });
+
+  silas.addEventListener("keydown", (event) => {
+    if ((event.key === "Enter" || event.key === " ") && !hasDesktopHover.matches) {
+      event.preventDefault();
+      touchWelcomeOpen = !touchWelcomeOpen;
+      updateWelcome();
+    }
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (!hasDesktopHover.matches && touchWelcomeOpen && event.target !== silas) {
+      touchWelcomeOpen = false;
+      updateWelcome();
+    }
+  });
 
   const introductions = [
     {
@@ -93,14 +158,13 @@ window.addEventListener("load", () => {
     timers.push(timer);
   };
 
-  // 1. Welcome message finishes at ~8 seconds.
-  // 2. Books launch.
+  // Books launch independently of the visitor-controlled Silas welcome.
   schedule(() => {
     studio.classList.add("books-launch");
-  }, 8300);
+  }, 800);
 
-  // 3. Books introduce themselves in sequence.
-  const firstStart = 10600;
+  // Books introduce themselves after all three launch animations complete.
+  const firstStart = 4100;
   const visibleTime = 4000;
   const gap = 500;
   const step = visibleTime + gap;
@@ -177,6 +241,8 @@ window.addEventListener("load", () => {
 window.addEventListener("pageshow", () => {
   const book01 = document.querySelector(".book-01");
   const dialogue = document.querySelector(".book-dialogue");
+  const silas = document.querySelector(".silas");
+  const welcome = document.querySelector(".welcome-box");
 
   entranceNavigationStarted = false;
 
@@ -187,5 +253,13 @@ window.addEventListener("pageshow", () => {
 
   if (dialogue) {
     dialogue.classList.remove("is-visible");
+  }
+
+  if (welcome) {
+    welcome.classList.remove("is-visible");
+  }
+
+  if (silas) {
+    silas.setAttribute("aria-expanded", "false");
   }
 });

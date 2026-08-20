@@ -23,6 +23,12 @@
       class="silas"
       src="assets/visual/Silas_typing.svg"
       alt="Silas typing"
+      role="button"
+      tabindex="0"
+      aria-label="Show Silas’s welcome message"
+      aria-controls="silas-welcome"
+      aria-expanded="false"
+      title="Meet Silas"
     />
   
     <div class="book-flight-layer" aria-hidden="true">
@@ -44,7 +50,7 @@
     </div>
 
   
-    <section class="welcome-box" aria-live="polite">
+    <section class="welcome-box" id="silas-welcome" aria-live="polite">
       <p>
         Welcome to Computing Forest, home of the Mushroom House AI Studio.
         This is our private prompt library for Dany’s ML/AI automation work—but since
